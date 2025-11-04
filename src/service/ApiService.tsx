@@ -179,7 +179,7 @@ export default class ApiService {
     }
 
     static async deleteCategory(categoryId: number): Promise<any> {
-        const response = await axios.delete(`${this.BASE_URL}/categories/${categoryId}`, {
+        const response = await axios.delete(`${this.BASE_URL}/categories/delete/${categoryId}`, {
             headers: this.getHeader()
         });
         return response.data;
@@ -196,7 +196,7 @@ export default class ApiService {
     }
 
     static async getAllSuppliers(): Promise<any> {
-        const response = await axios.get(`${this.BASE_URL}/suppliers/all/`, {
+        const response = await axios.get(`${this.BASE_URL}/suppliers/all`, {
             headers: this.getHeader()
         });
         return response.data;
@@ -218,7 +218,7 @@ export default class ApiService {
     }
 
     static async deleteSupplier(supplierId: number): Promise<any> {
-        const response = await axios.delete(`${this.BASE_URL}/suppliers/${supplierId}`, {
+        const response = await axios.delete(`${this.BASE_URL}/suppliers/delete/${supplierId}`, {
             headers: this.getHeader()
         });
         return response.data;

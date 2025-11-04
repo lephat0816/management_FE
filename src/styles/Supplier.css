@@ -1,0 +1,118 @@
+/* ----------- Supplier Page Container ----------- */
+.supplier-page {
+  background-color: #f9fafc;
+  padding: 30px;
+  border-radius: 12px;
+  min-height: 85vh;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ----------- Header ----------- */
+.supplier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.supplier-header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ----------- Add Supplier Section ----------- */
+.add-supplier {
+  display: flex;
+  gap: 10px;
+}
+
+.add-supplier button {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-supplier button:hover {
+  background-color: #1e7e34;
+}
+
+/* ----------- Message ----------- */
+.message {
+  background-color: #e9f7ef;
+  color: #1e7e34;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  border-left: 5px solid #28a745;
+}
+
+/* ----------- Supplier List ----------- */
+.supplier-list {
+  list-style: none;
+  margin-top: 15px;
+  padding: 0;
+}
+
+.supplier-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.supplier-item:hover {
+  background-color: #f4f6f9;
+  transform: translateY(-2px);
+}
+
+.supplier-item span {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* ----------- Actions ----------- */
+.supplier-action {
+  display: flex;
+  gap: 10px;
+}
+
+.supplier-action button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.supplier-action button:first-child {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.supplier-action button:first-child:hover {
+  background-color: #e0a800;
+}
+
+.supplier-action button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.supplier-action button:last-child:hover {
+  background-color: #b21f2d;
+}

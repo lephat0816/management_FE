@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import ApiService from "../service/ApiService";
+import '../styles/Category.css'
 
 interface CategoryData {
     title: string;
@@ -8,27 +9,27 @@ interface CategoryData {
     editingCategoryId: number;
 }
 const CategoryPage = () => {
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
     const [categoryData, setCategoryData] = useState<CategoryData>({
         title: "",
         isEditing: false,
         editingCategoryId: 0,
     });
     const [message, setMessage] = useState("");
-
-    useEffect(() => {
-        const getCategories = async () => {
-            try {
-                const res = await ApiService.getAllCategories();
-                if (res.status === 200) {
-                    setCategories(res.categories);
-                }
-            } catch (error: any) {
-                showMessage(
-                    error.response?.data?.message || "" + error
-                )
+    const getCategories = async () => {
+        try {
+            const res = await ApiService.getAllCategories();
+            if (res.status === 200) {
+                setCategories(res.categories);
             }
-        };
+        } catch (error: any) {
+            showMessage(
+                error.response?.data?.message || "" + error
+            )
+        }
+    };
+    useEffect(() => {
+
 
         getCategories();
     }, []);
@@ -40,10 +41,11 @@ const CategoryPage = () => {
         }
 
         try {
-            await ApiService.createCategory({ title: categoryData.title });
+            await ApiService.createCategory({ name: categoryData.title });
+            getCategories();
             showMessage("Category successfully added");
             setCategoryData({ ...categoryData, title: "" });
-            window.location.reload();
+            // window.location.reload();
         } catch (error: any) {
             showMessage(
                 error.response?.data?.message || "..." + error
@@ -53,10 +55,18 @@ const CategoryPage = () => {
 
     const editCategory = async () => {
         try {
-            await ApiService.updateCategory(categoryData.editingCategoryId, { title: categoryData.title });
+            await ApiService.updateCategory(categoryData.editingCategoryId, { name: categoryData.title });
+
+            setCategories(prev =>
+                prev.map(cat =>
+                    cat.id === categoryData.editingCategoryId
+                        ? { ...cat, name: categoryData.title }
+                        : cat
+                )
+            );
             showMessage("Category successfully updated");
             setCategoryData({ ...categoryData, isEditing: false, title: "" });
-            window.location.reload();
+            // window.location.reload();
         } catch (error: any) {
             showMessage(
                 error.response?.data?.message || "..." + error
@@ -66,7 +76,7 @@ const CategoryPage = () => {
 
     const handleEditCategory = (category: any) => {
         setCategoryData({
-            title: category.title,
+            title: category.name,
             isEditing: true,
             editingCategoryId: category.id
         });
@@ -78,6 +88,7 @@ const CategoryPage = () => {
             try {
                 await ApiService.deleteCategory(categoryId);
                 showMessage("Category successfully deleted");
+                getCategories();
             } catch (error: any) {
                 showMessage(
                     error.response?.data?.message || "..." + error
@@ -90,7 +101,7 @@ const CategoryPage = () => {
         setMessage(msg);
         setTimeout(() => {
             setMessage("")
-        }, 4000);
+        }, 1000);
     }
 
     return (
@@ -102,6 +113,7 @@ const CategoryPage = () => {
                         <h1>Categories</h1>
                         <div className="add-cat">
                             <input
+                                value={categoryData.title}
                                 type="text"
                                 placeholder="Category Title"
                                 onChange={(e) => setCategoryData({ ...categoryData, title: e.target.value })}
