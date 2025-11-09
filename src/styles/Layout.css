@@ -5,6 +5,7 @@
 }
 
 .main-content {
+  height: 100vh;
   flex: 1;
   padding: 25px;
 }

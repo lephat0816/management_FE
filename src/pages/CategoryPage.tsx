@@ -3,11 +3,13 @@ import Layout from "../components/Layout";
 import ApiService from "../service/ApiService";
 import '../styles/Category.css'
 
-interface CategoryData {
+export interface CategoryData {
+    id?: number;
     title: string;
     isEditing: boolean;
     editingCategoryId: number;
 }
+
 const CategoryPage = () => {
     const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
     const [categoryData, setCategoryData] = useState<CategoryData>({

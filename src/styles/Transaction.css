@@ -1,0 +1,110 @@
+/* ====== Transactions Page ====== */
+.transaction-page {
+  padding: 20px auto;
+  background-color: #f9fafb;
+}
+
+/* Header */
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.transaction-header h1 {
+  font-size: 28px;
+  color: #222;
+  font-weight: 600;
+}
+
+/* Search bar */
+.transaction-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transaction-search input {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 250px;
+  transition: all 0.2s ease;
+}
+
+.transaction-search input:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.transaction-search button {
+  padding: 10px 16px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.transaction-search button:hover {
+  background-color: #1e40af;
+}
+
+/* Table */
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.transaction-table th,
+.transaction-table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.transaction-table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.transaction-table tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Buttons inside table */
+.transaction-table button {
+  padding: 6px 12px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.transaction-table button:hover {
+  background-color: #059669;
+}
+
+/* Message */
+.message {
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #fcd34d;
+  text-align: center;
+}

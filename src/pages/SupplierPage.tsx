@@ -21,8 +21,7 @@ const SupplierPage = () => {
                 showMessage(responseData.message);
             }
         } catch (error: any) {
-            showMessage(error.response?.data?.message || "Error Getting Suppliers: " + error);
-            console.log(error);
+
         }
     }
     const showMessage = (msg: string) => {
@@ -44,13 +43,9 @@ const SupplierPage = () => {
         };
     };
 
-    const navigateToEditPage = (supplierId: number) => {
-        navigate(`/editsupplier/${supplierId}`);
-    }
-
     return (
         <Layout page={
-            <div>
+            <>
                 {message && <div className="message">{message}</div>}
                 <div className="supplier-page">
                     <div className="supplier-header">
@@ -60,21 +55,21 @@ const SupplierPage = () => {
                         </div>
                     </div>
                     {suppliers &&
-                    <ul className="supplier-list">
-                        {suppliers.map((supplier: any) => (
-                            <li className="supplier-item" key={supplier.id}>
-                                <span>{supplier.name}</span>
-                                <div className="supplier-action">
-                                    <button onClick={() => navigate(`/edit-supplier/${supplier.id}`)}>Edit</button>
-                                    <button onClick={() => handleDeleteSupplier(supplier.id)}>Delete</button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                }
+                        <ul className="supplier-list">
+                            {suppliers.map((supplier: any) => (
+                                <li className="supplier-item" key={supplier.id}>
+                                    <span>{supplier.name}</span>
+                                    <div className="supplier-action">
+                                        <button onClick={() => navigate(`/edit-supplier/${supplier.id}`)}>Edit</button>
+                                        <button onClick={() => handleDeleteSupplier(supplier.id)}>Delete</button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    }
                 </div>
-                
-            </div>
+
+            </>
         } />
 
 

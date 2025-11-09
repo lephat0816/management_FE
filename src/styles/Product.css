@@ -1,0 +1,142 @@
+/* ----------- Product Page Container ----------- */
+.product-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  gap: 5px;
+  color: #1e293b;
+  font-family: 'Inter', sans-serif;
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* ----------- Add Product Button ----------- */
+.add-product-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-product-btn:hover {
+  background-color: #1e7e34;
+}
+
+/* ----------- Message ----------- */
+.message {
+  background-color: #e9f7ef;
+  color: #1e7e34;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  border-left: 5px solid #28a745;
+}
+
+/* ----------- Product List ----------- */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* căn giữa theo chiều ngang */
+  justify-content: space-between;
+  width: 250px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Ảnh sản phẩm */
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* Thông tin sản phẩm */
+.product-info {
+  text-align: center;
+  /* căn giữa toàn bộ text */
+}
+
+.product-info .name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin: 4px 0 6px;
+}
+
+.product-info .sku,
+.product-info .price,
+.product-info .quantity {
+  color: #555;
+  font-size: 0.9rem;
+  margin: 3px 0;
+}
+
+/* Hành động */
+.product-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.product-actions .edit-btn,
+.product-actions .delete-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+/* Nút edit */
+.product-actions .edit-btn {
+  background-color: #ffc107;
+  color: white;
+}
+
+.product-actions .edit-btn:hover {
+  background-color: #0062cc;
+}
+
+/* Nút delete */
+.product-actions .delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.product-actions .delete-btn:hover {
+  background-color: #b52a36;
+}

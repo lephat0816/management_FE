@@ -98,7 +98,7 @@ export default class ApiService {
 
     /**PRODUCT ENDPOINTS */
     static async addProduct(formData: any): Promise<any> {
-        const response = await axios.post(`${this.BASE_URL}/product/add`, formData, {
+        const response = await axios.post(`${this.BASE_URL}/products/add`, formData, {
             headers: {
                 ...this.getHeader(),
                 "Content-Type": "multipart/form-data"
@@ -107,8 +107,8 @@ export default class ApiService {
         return response.data;
     }
 
-    static async getAllProduct(): Promise<any> {
-        const response = await axios.get(`${this.BASE_URL}/product/all/`, {
+    static async getAllProducts(): Promise<any> {
+        const response = await axios.get(`${this.BASE_URL}/products/all`, {
             headers: this.getHeader()
         });
         return response.data;
@@ -122,7 +122,7 @@ export default class ApiService {
     }
 
     static async updateProduct(formData: any): Promise<any> {
-        const response = await axios.put(`${this.BASE_URL}/product/update`, formData, {
+        const response = await axios.put(`${this.BASE_URL}/products/update`, formData, {
             headers: {
                 ...this.getHeader(),
                 "Content-Type": "multipart/form-data"
@@ -140,7 +140,7 @@ export default class ApiService {
     }
 
     static async removeProduct(productId: number): Promise<any> {
-        const response = await axios.delete(`${this.BASE_URL}/products/${productId}`, {
+        const response = await axios.delete(`${this.BASE_URL}/products/delete/${productId}`, {
             headers: this.getHeader()
         });
         return response.data;
@@ -203,7 +203,7 @@ export default class ApiService {
     }
 
     static async getSupplierById(supplierId: number): Promise<any> {
-        const response = await axios.get(`${this.BASE_URL}/suppliers/${supplierId}/`, {
+        const response = await axios.get(`${this.BASE_URL}/suppliers/${supplierId}`, {
             headers: this.getHeader()
         });
         return response.data;
@@ -226,7 +226,7 @@ export default class ApiService {
 
     /**TRANSACTION ENDPOINT */
 
-    static async purchaseStock(purchaseData: any): Promise<any> {
+    static async purchaseProduct(purchaseData: any): Promise<any> {
         const response = await axios.post(`${this.BASE_URL}/transactions/purchase`, purchaseData, {
             headers: this.getHeader()
 
@@ -235,22 +235,23 @@ export default class ApiService {
     }
 
     static async sellProduct(sellData: any): Promise<any> {
-        const response = await axios.post(`${this.BASE_URL}/transactions/sell/`, sellData,{
+        const response = await axios.post(`${this.BASE_URL}/transactions/sell`, sellData,{
             headers: this.getHeader()
         });
         return response.data;
     }
 
     static async returnToSupplier(returnData: any): Promise<any> {
-        const response = await axios.post(`${this.BASE_URL}/transactions/return/`, returnData, {
+        const response = await axios.post(`${this.BASE_URL}/transactions/return`, returnData, {
             headers: this.getHeader()
         });
         return response.data;
     }
 
-    static async getAllTransactions(): Promise<any> {
-        const response = await axios.get(`${this.BASE_URL}/transactions/all/`, {
-            headers: this.getHeader()
+    static async getAllTransactions(filter: any): Promise<any> {
+        const response = await axios.get(`${this.BASE_URL}/transactions/all`, {
+            headers: this.getHeader(),
+            params: {"searchValue": filter}
         });
         return response.data;
     }
