@@ -5,14 +5,16 @@ import { useNavigate } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import '../styles/Transaction.css'
 import type { ProductData } from "./AddEditProductPage";
+import type { SupplierData } from "./AddEditSupplierPage";
 interface UserData {
     id: number;
     name: string;
     email: string;
     phoneNumber: string;
     role: string;
+    createdAt?: Date;
 }
-interface TransactionData {
+export interface TransactionData {
     id: number;
     totalProducts: number;
     totalPrice: number;
@@ -23,13 +25,17 @@ interface TransactionData {
     createdAt: Date;
     product: ProductData;
     user: UserData;
+    supplier: SupplierData;
+    updateAt?: Date;
 }
 
 const TransactionsPage = () => {
     const [transactions, setTransactions] = useState<TransactionData[]>([]);
     const [message, setMessage] = useState("");
     const [filter, setFilter] = useState("");
-    const [valueToSerach, setValueToSeach] = useState("");
+    const [valueToSearch, setValueToSeach] = useState("");
+    const [sortField, setSortField] = useState<keyof TransactionData | null>(null);
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
     const navigate = useNavigate();
 
@@ -39,15 +45,37 @@ const TransactionsPage = () => {
 
     useEffect(() => {
         getTransactions();
-    }, [currentPage, valueToSerach]);
+    }, [currentPage, valueToSearch, sortField, sortOrder]);
 
     const getTransactions = async () => {
         try {
-            const response = await ApiService.getAllTransactions(valueToSerach);
+            const response = await ApiService.getAllTransactions(valueToSearch);
             if (response.status === 200) {
+                let sortedTransactions = [...response.transactions];
+
+                if (sortField) {
+                    sortedTransactions.sort((a, b) => {
+                        const fieldA = a[sortField];
+                        const fieldB = b[sortField];
+
+                        if (typeof fieldA === "string" && typeof fieldB === "string") {
+                            return sortOrder === "asc"
+                                ? fieldA.localeCompare(fieldB)
+                                : fieldB.localeCompare(fieldA);
+                        }
+                        if (fieldA instanceof Date && fieldB instanceof Date) {
+                            return sortOrder === "asc"
+                                ? fieldA.getTime() - fieldB.getTime()
+                                : fieldB.getTime() - fieldA.getTime();
+                        }
+                        return sortOrder === "asc"
+                            ? (fieldA as number) - (fieldB as number)
+                            : (fieldB as number) - (fieldA as number);
+                    });
+                }
                 setTotalPages(Math.ceil(response.transactions.length / itemsPerPage));
                 setTransactions(
-                    response.transactions.slice(
+                    sortedTransactions.slice(
                         (currentPage - 1) * itemsPerPage,
                         currentPage * itemsPerPage
                     )
@@ -76,6 +104,15 @@ const TransactionsPage = () => {
     const navigateToTransactionDetailsPage = (transactionId: number) => {
         navigate(`/transaction/${transactionId}`);
     }
+
+    const toggleSort = (field: keyof TransactionData) => {
+        if (sortField === field) {
+            setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+        } else {
+            setSortField(field);
+            setSortOrder("asc");
+        }
+    }
     return (
         <Layout
             page={
@@ -99,11 +136,23 @@ const TransactionsPage = () => {
                             <table className="transaction-table">
                                 <thead>
                                     <tr>
-                                        <th>TYPE</th>
+                                        <th onClick={() => toggleSort("transactionType")} className="sortable">
+                                            TYPE{" "}
+                                            {sortField === "transactionType" && (
+                                                <span className="sort-icon">
+                                                    {sortOrder === "asc" ? "▲" : "▼"}
+                                                </span>)}
+                                        </th>
                                         <th>STATUS</th>
                                         <th>TOTAL PRICE</th>
                                         <th>NO OF PRODUCTS</th>
-                                        <th>DATE</th>
+                                        <th onClick={() => toggleSort("createdAt")} className="sortable">
+                                            DATE{" "}
+                                            {sortField === "createdAt" && (
+                                                <span className="sort-icon">
+                                                    {sortOrder === "asc" ? "▲" : "▼"}
+                                                </span>)}
+                                        </th>
                                         <th>ACTIONS</th>
                                     </tr>
                                 </thead>

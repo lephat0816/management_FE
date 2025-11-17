@@ -108,3 +108,19 @@
   border: 1px solid #fcd34d;
   text-align: center;
 }
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+th.sortable:hover {
+  background-color: #f1f1f1;
+  transition: 0.2s;
+}
+
+.sort-icon {
+  font-size: 0.8em;
+  margin-left: 4px;
+  color: #008080;
+}

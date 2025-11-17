@@ -10,6 +10,11 @@ import AddEditProductPage from './pages/AddEditProductPage';
 import PurchasePage from './pages/PurchasePage';
 import SellPage from './pages/SellPage';
 import TransactionsPage from './pages/TransactionsPage';
+import TransactionDetailsPage from './pages/TransactionDetailsPage';
+import ProfilePage from './pages/ProfilePage';
+import DashboardPage from './pages/DashboardPage';
+import TransactionsPage2 from './pages/TransactionsPage2';
+import CategoryPage2 from './pages/CategoryPage copy';
 
 function App() {
 
@@ -20,7 +25,7 @@ function App() {
         <Route path='/login' element={<LoginPage />}></Route>
 
         {/* ADMIN ROUTES */}
-        <Route path='/category' element={<AdminRoute element={<CategoryPage />} />} />
+        <Route path='/category' element={<AdminRoute element={<CategoryPage2 />} />} />
         <Route path='/supplier' element={<AdminRoute element={<SupplierPage />} />} />
         <Route path='/add-supplier' element={<AdminRoute element={<AddEditSupplierPage />} />} />
         <Route path='/edit-supplier/:supplierId' element={<AdminRoute element={<AddEditSupplierPage />} />} />
@@ -30,7 +35,10 @@ function App() {
         {/* ADMIN AND MANAGERS ROUTES */}
         <Route path='/purchase' element={<ProtectedRoute element={<PurchasePage />} />} />
         <Route path='/sell' element={<ProtectedRoute element={<SellPage />} />} />
-        <Route path='/transaction' element={<ProtectedRoute element={<TransactionsPage />} />} />
+        <Route path='/transaction' element={<ProtectedRoute element={<TransactionsPage2 />} />} />
+        <Route path='/transaction/:transactionId' element={<ProtectedRoute element={<TransactionDetailsPage />} />} />
+        <Route path='/profile' element={<ProtectedRoute element={<ProfilePage />} />} />
+        <Route path='/dashboard' element={<ProtectedRoute element={<DashboardPage />} />} />
       </Routes>
     </Router>
   )

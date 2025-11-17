@@ -257,7 +257,7 @@ export default class ApiService {
     }
 
     static async getTransactionById(transactionId: number): Promise<any> {
-        const response = await axios.get(`${this.BASE_URL}/transactions/${transactionId}/`, {
+        const response = await axios.get(`${this.BASE_URL}/transactions/${transactionId}`, {
             headers: this.getHeader()
         });
         return response.data;

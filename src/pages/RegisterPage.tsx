@@ -3,11 +3,12 @@ import React, { useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../service/ApiService";
 
-interface FormRegister {
+export interface FormRegister {
     name: string;
     email: string;
     password: string;
     phoneNumber: string;
+    role?: string;
 }
 
 const RegisterPage = (): JSX.Element => {
